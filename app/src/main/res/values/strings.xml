@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Collections and Maps version 2</string>
+    <string name="hintSizeOfCollection">Size of collection</string>
+    <string name="calculateButton">Calculate</string>
+    <string name="collectionFragment">Collection fragment</string>
+    <string name="mapFragment">Map fragment</string>
 </resources>
