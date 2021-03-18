@@ -13,23 +13,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
+import ua.com.foxminded.collectionsandmapsversion2.App;
 import ua.com.foxminded.collectionsandmapsversion2.BaseFragment;
 import ua.com.foxminded.collectionsandmapsversion2.BaseRecyclerViewAdapter;
 import ua.com.foxminded.collectionsandmapsversion2.CalculatedOperation;
 import ua.com.foxminded.collectionsandmapsversion2.ListOfCollectionsOperation;
 import ua.com.foxminded.collectionsandmapsversion2.databinding.FragmentCollectionBinding;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.BaseContract;
+import ua.com.foxminded.collectionsandmapsversion2.presenter.CollectionsPresenter;
 
 
 public class CollectionFragment extends BaseFragment implements BaseContract.BaseView {
 
-    private FragmentCollectionBinding binding;
 
+    @Inject
+    private CollectionsPresenter collectionsPresenter;
+    private FragmentCollectionBinding binding;
     private BaseRecyclerViewAdapter collectionsAdapter;
     private int numberOfColumns = 7;
     private ArrayList<CalculatedOperation> listOfResultsOperations;
     private ListOfCollectionsOperation listOfCollectionsOperation = new ListOfCollectionsOperation();
-
 
     public CollectionFragment() {
     }

@@ -2,17 +2,13 @@ package ua.com.foxminded.collectionsandmapsversion2.presenter;
 
 import android.os.Message;
 
-
-import ua.com.foxminded.collectionsandmapsversion2.presenter.BaseContract;
-import ua.com.foxminded.collectionsandmapsversion2.model.IModel;
-
 public class MapsPresenter implements BaseContract.BasePresenter {
 
     private BaseContract.BaseView mapsView;
-    private IModel iModel;
+    private BaseContract.Model model;
 
-    public MapsPresenter(IModel IModel) {
-        this.iModel = IModel;
+    public MapsPresenter(BaseContract.Model model) {
+        this.model = model;
     }
 
     @Override

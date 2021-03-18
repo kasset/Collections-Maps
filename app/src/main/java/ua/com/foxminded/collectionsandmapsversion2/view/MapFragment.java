@@ -13,15 +13,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import ua.com.foxminded.collectionsandmapsversion2.BaseFragment;
 import ua.com.foxminded.collectionsandmapsversion2.BaseRecyclerViewAdapter;
 import ua.com.foxminded.collectionsandmapsversion2.CalculatedOperation;
 import ua.com.foxminded.collectionsandmapsversion2.ListOfMapsOperation;
 import ua.com.foxminded.collectionsandmapsversion2.databinding.FragmentMapBinding;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.BaseContract;
+import ua.com.foxminded.collectionsandmapsversion2.presenter.MapsPresenter;
 
 public class MapFragment extends BaseFragment implements BaseContract.BaseView {
 
+    @Inject
+    private MapsPresenter mapsPresenter;
     private FragmentMapBinding binding;
     private BaseRecyclerViewAdapter mapAdapter;
     private int numberOfColumns = 3;

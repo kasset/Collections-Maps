@@ -13,9 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.foxminded.collectionsandmapsversion2.databinding.ActivityMainBinding;
-import ua.com.foxminded.collectionsandmapsversion2.model.Model;
+import ua.com.foxminded.collectionsandmapsversion2.model.Storage;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.BaseContract;
-import ua.com.foxminded.collectionsandmapsversion2.model.IModel;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.CollectionsPresenter;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.MapsPresenter;
 import ua.com.foxminded.collectionsandmapsversion2.view.CollectionFragment;
@@ -28,10 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager pager;
     private ActivityMainBinding binding;
     private SectionPagerAdapter adapter;
-
-    private BaseContract.BasePresenter collectionsPresenter;
-    private BaseContract.BasePresenter mapsPresenter;
-    private IModel iModel;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -51,22 +46,13 @@ public class MainActivity extends AppCompatActivity {
         pager = binding.pager;
         binding.pager.setAdapter(adapter);
         binding.tabs.setupWithViewPager(pager);
-        iModel = new Model(collectionsPresenter);
-        ArrayList<BaseContract.BasePresenter> listOfPresenters = new ArrayList<>();
-        listOfPresenters.add(collectionsPresenter = new CollectionsPresenter(iModel));
-        listOfPresenters.add(mapsPresenter = new MapsPresenter(iModel));
         binding.calculateButton.setOnClickListener(v -> {
             if (!binding.sizeOfCollectionEditText.getText().toString().isEmpty()) {
                 listOfPresenters.forEach(basePresenter ->
                         basePresenter.buttonClicked(Integer.parseInt(binding.sizeOfCollectionEditText.getText().toString())));
             }
         });
+        App.getComponent().inject();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        collectionsPresenter.detachView();
-        mapsPresenter.detachView();
-    }
 }

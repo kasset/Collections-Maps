@@ -6,18 +6,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ua.com.foxminded.collectionsandmapsversion2.model.IModel;
+import javax.inject.Inject;
+
 import ua.com.foxminded.collectionsandmapsversion2.presenter.BaseContract;
 import ua.com.foxminded.collectionsandmapsversion2.strategy.AbstractOperation;
 
-public class Model implements IModel {
+public class Storage implements BaseContract.Model{
 
+    @Inject
     private BaseContract.BasePresenter collectionsPresenter;
+    @Inject
     private BaseContract.BasePresenter mapsPresenter;
     private HashMap<Integer, Map<Integer, Integer>> operationResults;
 
-    public Model(BaseContract.BasePresenter collectionsPresenter) {
+    public Storage(BaseContract.BasePresenter collectionsPresenter, BaseContract.BasePresenter mapsPresenter) {
         this.collectionsPresenter = collectionsPresenter;
+        this.mapsPresenter = mapsPresenter;
     }
 
     @Override
