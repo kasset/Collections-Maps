@@ -3,7 +3,7 @@ package ua.com.foxminded.collectionsandmapsversion2.strategy;
 import android.os.Handler;
 import android.os.Message;
 
-abstract public class AbstractOperation<T> implements Runnable {
+abstract public class AbstractOperation<T> implements Runnable{
     protected T t;
     protected int dataStructureType;
     protected int id;

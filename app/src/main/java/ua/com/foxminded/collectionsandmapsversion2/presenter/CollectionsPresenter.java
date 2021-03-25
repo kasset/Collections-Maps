@@ -2,22 +2,26 @@ package ua.com.foxminded.collectionsandmapsversion2.presenter;
 
 import android.os.Message;
 
-public class CollectionsPresenter implements BaseContract.BasePresenter {
+import ua.com.foxminded.collectionsandmapsversion2.ListOfCollectionsOperation;
+import ua.com.foxminded.collectionsandmapsversion2.model.Storage;
+import ua.com.foxminded.collectionsandmapsversion2.view.CollectionFragment;
+
+public class CollectionsPresenter extends BasePresenter implements BaseContract.BasePresenter {
 
     private BaseContract.BaseView collectionView;
-    private BaseContract.Model model;
 
-    public CollectionsPresenter(BaseContract.Model model) {
-        this.model= model;
+    public CollectionsPresenter(BaseContract.Model storage) {
+        super(storage);
     }
+
 
     @Override
     public void attachView(BaseContract.BaseView view) {
-        collectionView = view;
+        this.collectionView = view;
     }
 
     @Override
-    public void buttonClicked(int size) {
+    public void initiateCalculation(int size) {
         collectionView.showProgressBar();
     }
 
@@ -28,11 +32,10 @@ public class CollectionsPresenter implements BaseContract.BasePresenter {
 
     @Override
     public void restoreResults() {
-
     }
 
     @Override
     public void detachView() {
-        collectionView = null;
+        this.collectionView = null;
     }
 }

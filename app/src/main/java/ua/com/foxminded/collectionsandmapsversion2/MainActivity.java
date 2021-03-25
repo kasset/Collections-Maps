@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 import java.util.ArrayList;
 import java.util.List;
 
+import dagger.android.support.DaggerAppCompatActivity;
 import ua.com.foxminded.collectionsandmapsversion2.databinding.ActivityMainBinding;
 import ua.com.foxminded.collectionsandmapsversion2.model.Storage;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.BaseContract;
@@ -23,7 +24,7 @@ import ua.com.foxminded.collectionsandmapsversion2.view.MapFragment;
 import static androidx.fragment.app.FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends DaggerAppCompatActivity {
     private ViewPager pager;
     private ActivityMainBinding binding;
     private SectionPagerAdapter adapter;
@@ -48,11 +49,10 @@ public class MainActivity extends AppCompatActivity {
         binding.tabs.setupWithViewPager(pager);
         binding.calculateButton.setOnClickListener(v -> {
             if (!binding.sizeOfCollectionEditText.getText().toString().isEmpty()) {
-                listOfPresenters.forEach(basePresenter ->
-                        basePresenter.buttonClicked(Integer.parseInt(binding.sizeOfCollectionEditText.getText().toString())));
+                fragmentsList.forEach(baseFragment ->
+                        baseFragment.getFragment().sendSize(Integer.parseInt(binding.sizeOfCollectionEditText.getText().toString())));
             }
         });
-        App.getComponent().inject();
     }
 
 }

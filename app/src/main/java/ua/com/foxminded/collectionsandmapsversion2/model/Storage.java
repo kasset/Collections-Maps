@@ -10,18 +10,14 @@ import javax.inject.Inject;
 
 import ua.com.foxminded.collectionsandmapsversion2.presenter.BaseContract;
 import ua.com.foxminded.collectionsandmapsversion2.strategy.AbstractOperation;
+import ua.com.foxminded.collectionsandmapsversion2.view.CollectionFragment;
 
-public class Storage implements BaseContract.Model{
+public class
+Storage implements BaseContract.Model{
 
-    @Inject
-    private BaseContract.BasePresenter collectionsPresenter;
-    @Inject
-    private BaseContract.BasePresenter mapsPresenter;
-    private HashMap<Integer, Map<Integer, Integer>> operationResults;
+    private HashMap<Integer, Map<Integer, Integer>> operationResults = new HashMap<>();
 
-    public Storage(BaseContract.BasePresenter collectionsPresenter, BaseContract.BasePresenter mapsPresenter) {
-        this.collectionsPresenter = collectionsPresenter;
-        this.mapsPresenter = mapsPresenter;
+    public Storage() {
     }
 
     @Override

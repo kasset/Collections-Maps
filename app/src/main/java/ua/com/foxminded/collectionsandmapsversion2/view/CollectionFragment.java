@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import ua.com.foxminded.collectionsandmapsversion2.App;
 import ua.com.foxminded.collectionsandmapsversion2.BaseFragment;
 import ua.com.foxminded.collectionsandmapsversion2.BaseRecyclerViewAdapter;
 import ua.com.foxminded.collectionsandmapsversion2.CalculatedOperation;
@@ -26,7 +25,6 @@ import ua.com.foxminded.collectionsandmapsversion2.presenter.CollectionsPresente
 
 
 public class CollectionFragment extends BaseFragment implements BaseContract.BaseView {
-
 
     @Inject
     private CollectionsPresenter collectionsPresenter;
@@ -78,5 +76,9 @@ public class CollectionFragment extends BaseFragment implements BaseContract.Bas
         super.onDestroyView();
         binding = null;
     }
-    
+
+    @Override
+    public void sendSize(int size) {
+        collectionsPresenter.initiateCalculation(size);
+    }
 }

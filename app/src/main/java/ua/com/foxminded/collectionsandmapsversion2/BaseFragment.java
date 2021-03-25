@@ -14,10 +14,14 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import ua.com.foxminded.collectionsandmapsversion2.databinding.ActivityMainBinding;
+import ua.com.foxminded.collectionsandmapsversion2.presenter.BaseContract;
+import ua.com.foxminded.collectionsandmapsversion2.presenter.BasePresenter;
 import ua.com.foxminded.collectionsandmapsversion2.strategy.AbstractOperation;
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements SizeProvider {
 
     public BaseFragment() {
     }
@@ -34,10 +38,10 @@ public abstract class BaseFragment extends Fragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+
+
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void sendSize(int size) {
 
     }
-
 }

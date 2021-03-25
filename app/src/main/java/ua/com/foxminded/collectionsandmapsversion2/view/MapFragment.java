@@ -19,6 +19,7 @@ import ua.com.foxminded.collectionsandmapsversion2.BaseFragment;
 import ua.com.foxminded.collectionsandmapsversion2.BaseRecyclerViewAdapter;
 import ua.com.foxminded.collectionsandmapsversion2.CalculatedOperation;
 import ua.com.foxminded.collectionsandmapsversion2.ListOfMapsOperation;
+import ua.com.foxminded.collectionsandmapsversion2.SizeProvider;
 import ua.com.foxminded.collectionsandmapsversion2.databinding.FragmentMapBinding;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.BaseContract;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.MapsPresenter;
@@ -77,6 +78,10 @@ public class MapFragment extends BaseFragment implements BaseContract.BaseView {
     }
 
 
+    @Override
+    public void sendSize(int size) {
+        mapsPresenter.initiateCalculation(size);
+    }
 }
 
 

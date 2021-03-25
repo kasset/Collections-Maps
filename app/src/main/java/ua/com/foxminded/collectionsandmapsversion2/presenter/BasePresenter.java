@@ -2,38 +2,37 @@ package ua.com.foxminded.collectionsandmapsversion2.presenter;
 
 import android.os.Message;
 
-import ua.com.foxminded.collectionsandmapsversion2.model.Storage;
 
+abstract public class BasePresenter implements BaseContract.BasePresenter {
 
-public class MapsPresenter extends BasePresenter implements BaseContract.BasePresenter {
+    BaseContract.Model storage;
 
-    private BaseContract.BaseView mapsView;
-
-    public MapsPresenter(BaseContract.Model storage) {
-        super(storage);
+    public BasePresenter(BaseContract.Model storage) {
+        this.storage = storage;
     }
 
     @Override
     public void attachView(BaseContract.BaseView view) {
-        mapsView = view;
+
     }
 
     @Override
     public void initiateCalculation(int size) {
-        mapsView.showProgressBar();
+
     }
 
     @Override
     public void publishResult(Message message) {
-        mapsView.publishOperationResult(message);
+
     }
 
     @Override
     public void restoreResults() {
+
     }
 
     @Override
     public void detachView() {
-        mapsView = null;
+
     }
 }

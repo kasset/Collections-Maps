@@ -4,6 +4,7 @@ import android.os.Message;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import ua.com.foxminded.collectionsandmapsversion2.strategy.AbstractOperation;
 
@@ -14,9 +15,13 @@ public interface BaseContract {
     }
     interface BasePresenter{
         void attachView(BaseView view);
-        void buttonClicked(int size);
+
+        void initiateCalculation(int size);
+
         void publishResult(Message message);
+
         void restoreResults();
+
         void detachView();
     }
     interface Model{
