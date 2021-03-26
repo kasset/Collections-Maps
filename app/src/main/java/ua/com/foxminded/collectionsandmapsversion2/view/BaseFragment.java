@@ -47,5 +47,5 @@ public abstract class BaseFragment extends Fragment implements SizeProvider {
     public void sendSize(int size) {
     }
 
-    protected abstract BaseContract.BasePresenter getPresenter(Class<?> fragmentType);
+    protected abstract BasePresenter getPresenter(Class<?> fragmentType);
 }

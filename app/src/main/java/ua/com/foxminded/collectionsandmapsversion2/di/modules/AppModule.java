@@ -20,20 +20,20 @@ public class AppModule {
     @Provides
     @IntoMap
     @ClassKey(CollectionFragment.class)
-    public BaseContract.BasePresenter provideCollectionsPresenter(Storage storage) {
+    public static BasePresenter provideCollectionsPresenter(Storage storage) {
         return new CollectionsPresenter(storage);
     }
 
     @Provides
     @IntoMap
     @ClassKey(MapFragment.class)
-    public BaseContract.BasePresenter provideMapsPresenter(Storage storage) {
+    public static BasePresenter provideMapsPresenter(Storage storage) {
         return new MapsPresenter(storage);
     }
 
     @Singleton
     @Provides
-    public Storage provideStorage() {
+    public static Storage provideStorage() {
         return new Storage();
     }
 

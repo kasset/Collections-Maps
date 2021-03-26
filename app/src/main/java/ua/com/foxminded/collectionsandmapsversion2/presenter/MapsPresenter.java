@@ -5,7 +5,7 @@ import android.os.Message;
 import ua.com.foxminded.collectionsandmapsversion2.model.Storage;
 
 
-public class MapsPresenter extends BasePresenter implements BaseContract.BasePresenter {
+public class MapsPresenter extends BasePresenter {
 
     private BaseContract.BaseView mapsView;
 

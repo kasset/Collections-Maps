@@ -6,7 +6,7 @@ import ua.com.foxminded.collectionsandmapsversion2.ListOfCollectionsOperation;
 import ua.com.foxminded.collectionsandmapsversion2.model.Storage;
 import ua.com.foxminded.collectionsandmapsversion2.view.CollectionFragment;
 
-public class CollectionsPresenter extends BasePresenter implements BaseContract.BasePresenter {
+public class CollectionsPresenter extends BasePresenter {
 
     private BaseContract.BaseView collectionView;
 

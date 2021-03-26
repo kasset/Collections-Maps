@@ -20,12 +20,13 @@ import ua.com.foxminded.collectionsandmapsversion2.CalculatedOperation;
 import ua.com.foxminded.collectionsandmapsversion2.ListOfCollectionsOperation;
 import ua.com.foxminded.collectionsandmapsversion2.databinding.FragmentCollectionBinding;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.BaseContract;
+import ua.com.foxminded.collectionsandmapsversion2.presenter.BasePresenter;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.CollectionsPresenter;
 
 
 public class CollectionFragment extends BaseFragment implements BaseContract.BaseView {
 
-    private BaseContract.BasePresenter collectionsPresenter;
+    private BasePresenter collectionsPresenter;
     private FragmentCollectionBinding binding;
     private BaseRecyclerViewAdapter collectionsAdapter;
     private int numberOfColumns = 7;
@@ -52,7 +53,7 @@ public class CollectionFragment extends BaseFragment implements BaseContract.Bas
         recyclerViewCollections.setLayoutManager(layoutManager);
         collectionsAdapter = new BaseRecyclerViewAdapter(listOfResultsOperations);
         recyclerViewCollections.setAdapter(collectionsAdapter);
-        getPresenter(this.getClass());
+        collectionsPresenter = getPresenter(CollectionFragment.class);
         return view;
     }
 
@@ -82,7 +83,7 @@ public class CollectionFragment extends BaseFragment implements BaseContract.Bas
     }
 
     @Override
-    protected BaseContract.BasePresenter getPresenter(Class<?> fragmentType) {
-        return this.collectionsPresenter = presenterFactory.getPresenter(fragmentType);
+    protected BasePresenter getPresenter(Class<?> fragmentType) {
+        return presenterFactory.getPresenter(fragmentType);
     }
 }
