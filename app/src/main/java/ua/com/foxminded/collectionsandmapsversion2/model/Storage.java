@@ -12,8 +12,7 @@ import ua.com.foxminded.collectionsandmapsversion2.presenter.BaseContract;
 import ua.com.foxminded.collectionsandmapsversion2.strategy.AbstractOperation;
 import ua.com.foxminded.collectionsandmapsversion2.view.CollectionFragment;
 
-public class
-Storage implements BaseContract.Model{
+public class Storage implements BaseContract.Model{
 
     private HashMap<Integer, Map<Integer, Integer>> operationResults = new HashMap<>();
 

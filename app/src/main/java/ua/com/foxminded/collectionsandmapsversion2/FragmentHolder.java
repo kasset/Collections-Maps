@@ -1,6 +1,8 @@
 package ua.com.foxminded.collectionsandmapsversion2;
 
 
+import ua.com.foxminded.collectionsandmapsversion2.view.BaseFragment;
+
 public class FragmentHolder {
 
     private BaseFragment fragment;

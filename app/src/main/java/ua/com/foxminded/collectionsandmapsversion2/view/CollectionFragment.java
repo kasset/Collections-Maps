@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import ua.com.foxminded.collectionsandmapsversion2.BaseFragment;
 import ua.com.foxminded.collectionsandmapsversion2.BaseRecyclerViewAdapter;
 import ua.com.foxminded.collectionsandmapsversion2.CalculatedOperation;
 import ua.com.foxminded.collectionsandmapsversion2.ListOfCollectionsOperation;
@@ -26,8 +25,7 @@ import ua.com.foxminded.collectionsandmapsversion2.presenter.CollectionsPresente
 
 public class CollectionFragment extends BaseFragment implements BaseContract.BaseView {
 
-    @Inject
-    private CollectionsPresenter collectionsPresenter;
+    private BaseContract.BasePresenter collectionsPresenter;
     private FragmentCollectionBinding binding;
     private BaseRecyclerViewAdapter collectionsAdapter;
     private int numberOfColumns = 7;
@@ -54,6 +52,7 @@ public class CollectionFragment extends BaseFragment implements BaseContract.Bas
         recyclerViewCollections.setLayoutManager(layoutManager);
         collectionsAdapter = new BaseRecyclerViewAdapter(listOfResultsOperations);
         recyclerViewCollections.setAdapter(collectionsAdapter);
+        getPresenter(this.getClass());
         return view;
     }
 
@@ -66,10 +65,10 @@ public class CollectionFragment extends BaseFragment implements BaseContract.Bas
 
     @Override
     public void publishOperationResult(Message message) {
-            collectionsAdapter.updateOperationResult(message.arg1, message.arg2, false);
-            collectionsAdapter.notifyItemChanged(message.arg1);
+        collectionsAdapter.updateOperationResult(message.arg1, message.arg2, false);
+        collectionsAdapter.notifyItemChanged(message.arg1);
     }
-    
+
 
     @Override
     public void onDestroyView() {
@@ -80,5 +79,10 @@ public class CollectionFragment extends BaseFragment implements BaseContract.Bas
     @Override
     public void sendSize(int size) {
         collectionsPresenter.initiateCalculation(size);
+    }
+
+    @Override
+    protected BaseContract.BasePresenter getPresenter(Class<?> fragmentType) {
+        return this.collectionsPresenter = presenterFactory.getPresenter(fragmentType);
     }
 }

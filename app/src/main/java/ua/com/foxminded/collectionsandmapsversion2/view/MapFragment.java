@@ -15,19 +15,16 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import ua.com.foxminded.collectionsandmapsversion2.BaseFragment;
 import ua.com.foxminded.collectionsandmapsversion2.BaseRecyclerViewAdapter;
 import ua.com.foxminded.collectionsandmapsversion2.CalculatedOperation;
 import ua.com.foxminded.collectionsandmapsversion2.ListOfMapsOperation;
-import ua.com.foxminded.collectionsandmapsversion2.SizeProvider;
 import ua.com.foxminded.collectionsandmapsversion2.databinding.FragmentMapBinding;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.BaseContract;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.MapsPresenter;
 
 public class MapFragment extends BaseFragment implements BaseContract.BaseView {
 
-    @Inject
-    private MapsPresenter mapsPresenter;
+    private BaseContract.BasePresenter mapsPresenter;
     private FragmentMapBinding binding;
     private BaseRecyclerViewAdapter mapAdapter;
     private int numberOfColumns = 3;
@@ -55,6 +52,7 @@ public class MapFragment extends BaseFragment implements BaseContract.BaseView {
         recyclerViewMap.setLayoutManager(layoutManager);
         mapAdapter = new BaseRecyclerViewAdapter(listOfResultsOperations);
         recyclerViewMap.setAdapter(mapAdapter);
+        getPresenter(this.getClass());
         return view;
     }
 
@@ -81,6 +79,11 @@ public class MapFragment extends BaseFragment implements BaseContract.BaseView {
     @Override
     public void sendSize(int size) {
         mapsPresenter.initiateCalculation(size);
+    }
+
+    @Override
+    protected BaseContract.BasePresenter getPresenter(Class<?> fragmentType) {
+        return this.mapsPresenter = presenterFactory.getPresenter(fragmentType);
     }
 }
 

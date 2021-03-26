@@ -33,7 +33,7 @@ public class AppModule {
 
     @Singleton
     @Provides
-    public BaseContract.Model provideStorage() {
+    public Storage provideStorage() {
         return new Storage();
     }
 

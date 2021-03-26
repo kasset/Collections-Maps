@@ -9,6 +9,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.List;
 
+import ua.com.foxminded.collectionsandmapsversion2.view.BaseFragment;
+
 public class SectionPagerAdapter extends FragmentPagerAdapter {
 
     private final List<FragmentHolder> fragmentsList;
