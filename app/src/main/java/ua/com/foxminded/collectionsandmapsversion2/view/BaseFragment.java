@@ -11,17 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.util.ArrayList;
-import java.util.Map;
-
 import javax.inject.Inject;
 
 import ua.com.foxminded.collectionsandmapsversion2.SizeProvider;
-import ua.com.foxminded.collectionsandmapsversion2.databinding.ActivityMainBinding;
 import ua.com.foxminded.collectionsandmapsversion2.di.modules.BasePresenterFactory;
-import ua.com.foxminded.collectionsandmapsversion2.presenter.BaseContract;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.BasePresenter;
-import ua.com.foxminded.collectionsandmapsversion2.strategy.AbstractOperation;
 
 public abstract class BaseFragment extends Fragment implements SizeProvider {
 
@@ -47,5 +41,9 @@ public abstract class BaseFragment extends Fragment implements SizeProvider {
     public void sendSize(int size) {
     }
 
-    protected abstract BasePresenter getPresenter(Class<?> fragmentType);
+    public abstract void showInitiateCalculating();
+
+    public abstract void publishOperationResult(Message message);
+
+    protected abstract BasePresenter getPresenter(Class<?> presenterType);
 }

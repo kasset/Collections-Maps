@@ -5,7 +5,7 @@ import dagger.android.ContributesAndroidInjector;
 import ua.com.foxminded.collectionsandmapsversion2.MainActivity;
 
 @Module
-public abstract class MainActivityModule {
+public interface MainActivityModule {
     @ContributesAndroidInjector
-    abstract MainActivity mainActivity();
+    MainActivity contributeMainActivity();
 }

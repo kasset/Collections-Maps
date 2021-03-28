@@ -2,25 +2,30 @@ package ua.com.foxminded.collectionsandmapsversion2.presenter;
 
 import android.os.Message;
 
+import javax.inject.Inject;
+
 import ua.com.foxminded.collectionsandmapsversion2.model.Storage;
+import ua.com.foxminded.collectionsandmapsversion2.view.BaseFragment;
 
 
 public class MapsPresenter extends BasePresenter {
 
-    private BaseContract.BaseView mapsView;
+    private BaseFragment mapsView;
+    private Storage storage;
 
-    public MapsPresenter(BaseContract.Model storage) {
-        super(storage);
+    @Inject
+    public MapsPresenter(Storage storage) {
+        this.storage = storage;
     }
 
     @Override
-    public void attachView(BaseContract.BaseView view) {
+    public void attachView(BaseFragment view) {
         mapsView = view;
     }
 
     @Override
     public void initiateCalculation(int size) {
-        mapsView.showProgressBar();
+        mapsView.showInitiateCalculating();
     }
 
     @Override
@@ -30,6 +35,7 @@ public class MapsPresenter extends BasePresenter {
 
     @Override
     public void restoreResults() {
+        storage.restoreResults();
     }
 
     @Override

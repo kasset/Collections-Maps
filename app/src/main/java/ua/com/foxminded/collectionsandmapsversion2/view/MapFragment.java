@@ -13,19 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import javax.inject.Inject;
-
 import ua.com.foxminded.collectionsandmapsversion2.BaseRecyclerViewAdapter;
 import ua.com.foxminded.collectionsandmapsversion2.CalculatedOperation;
 import ua.com.foxminded.collectionsandmapsversion2.ListOfMapsOperation;
 import ua.com.foxminded.collectionsandmapsversion2.databinding.FragmentMapBinding;
-import ua.com.foxminded.collectionsandmapsversion2.presenter.BaseContract;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.BasePresenter;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.MapsPresenter;
 
-public class MapFragment extends BaseFragment implements BaseContract.BaseView {
+public class MapFragment extends BaseFragment {
 
-    private BasePresenter mapsPresenter;
+    MapsPresenter mapsPresenter;
     private FragmentMapBinding binding;
     private BaseRecyclerViewAdapter mapAdapter;
     private int numberOfColumns = 3;
@@ -53,12 +50,11 @@ public class MapFragment extends BaseFragment implements BaseContract.BaseView {
         recyclerViewMap.setLayoutManager(layoutManager);
         mapAdapter = new BaseRecyclerViewAdapter(listOfResultsOperations);
         recyclerViewMap.setAdapter(mapAdapter);
-        mapsPresenter = getPresenter(MapFragment.class);
         return view;
     }
 
     @Override
-    public void showProgressBar() {
+    public void showInitiateCalculating() {
         for (int i = 0; i < listOfResultsOperations.size(); i++) {
             mapAdapter.updateOperationResult(i, 0, true);
         }
@@ -68,6 +64,11 @@ public class MapFragment extends BaseFragment implements BaseContract.BaseView {
     public void publishOperationResult(Message message) {
         mapAdapter.updateOperationResult(message.arg1, message.arg2, false);
         mapAdapter.notifyItemChanged(message.arg1);
+    }
+
+    @Override
+    protected BasePresenter getPresenter(Class<?> presenterType) {
+        return null;
     }
 
     @Override
@@ -82,10 +83,6 @@ public class MapFragment extends BaseFragment implements BaseContract.BaseView {
         mapsPresenter.initiateCalculation(size);
     }
 
-    @Override
-    protected BasePresenter getPresenter(Class<?> fragmentType) {
-        return presenterFactory.getPresenter(fragmentType);
-    }
 }
 
 

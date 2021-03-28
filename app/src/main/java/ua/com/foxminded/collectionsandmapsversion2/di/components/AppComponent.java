@@ -7,8 +7,9 @@ import dagger.Component;
 import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 import ua.com.foxminded.collectionsandmapsversion2.di.App;
+
 import ua.com.foxminded.collectionsandmapsversion2.di.modules.AppModule;
-import ua.com.foxminded.collectionsandmapsversion2.di.modules.BaseFragmentModule;
+import ua.com.foxminded.collectionsandmapsversion2.di.modules.FragmentsModule;
 import ua.com.foxminded.collectionsandmapsversion2.di.modules.MainActivityModule;
 
 @Singleton
@@ -16,7 +17,7 @@ import ua.com.foxminded.collectionsandmapsversion2.di.modules.MainActivityModule
         modules = {
                 AndroidSupportInjectionModule.class,
                 MainActivityModule.class,
-                BaseFragmentModule.class,
+                FragmentsModule.class,
                 AppModule.class
         }
 )

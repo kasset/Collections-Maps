@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
@@ -14,10 +13,6 @@ import java.util.List;
 
 import dagger.android.support.DaggerAppCompatActivity;
 import ua.com.foxminded.collectionsandmapsversion2.databinding.ActivityMainBinding;
-import ua.com.foxminded.collectionsandmapsversion2.model.Storage;
-import ua.com.foxminded.collectionsandmapsversion2.presenter.BaseContract;
-import ua.com.foxminded.collectionsandmapsversion2.presenter.CollectionsPresenter;
-import ua.com.foxminded.collectionsandmapsversion2.presenter.MapsPresenter;
 import ua.com.foxminded.collectionsandmapsversion2.view.CollectionFragment;
 import ua.com.foxminded.collectionsandmapsversion2.view.MapFragment;
 
@@ -51,7 +46,7 @@ public class MainActivity extends DaggerAppCompatActivity {
             if (!binding.sizeOfCollectionEditText.getText().toString().isEmpty()) {
                 fragmentsList.forEach(baseFragment ->
                         baseFragment.getFragment().sendSize(Integer.parseInt(binding.sizeOfCollectionEditText.getText().toString())));
-            }
+                }
         });
     }
 

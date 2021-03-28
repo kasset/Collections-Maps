@@ -1,40 +1,17 @@
 package ua.com.foxminded.collectionsandmapsversion2.di.modules;
 
+
 import javax.inject.Singleton;
 
+import dagger.Binds;
 import dagger.Module;
-import dagger.Provides;
-import dagger.multibindings.ClassKey;
-import dagger.multibindings.IntoMap;
 import ua.com.foxminded.collectionsandmapsversion2.model.Storage;
-import ua.com.foxminded.collectionsandmapsversion2.presenter.BaseContract;
-import ua.com.foxminded.collectionsandmapsversion2.presenter.BasePresenter;
-import ua.com.foxminded.collectionsandmapsversion2.presenter.CollectionsPresenter;
-import ua.com.foxminded.collectionsandmapsversion2.presenter.MapsPresenter;
-import ua.com.foxminded.collectionsandmapsversion2.view.CollectionFragment;
-import ua.com.foxminded.collectionsandmapsversion2.view.MapFragment;
+import ua.com.foxminded.collectionsandmapsversion2.model.Model;
 
-@Module
-public class AppModule {
+@Module(includes = {PresentersModule.class})
+public abstract class AppModule {
 
-    @Provides
-    @IntoMap
-    @ClassKey(CollectionFragment.class)
-    public static BasePresenter provideCollectionsPresenter(Storage storage) {
-        return new CollectionsPresenter(storage);
-    }
-
-    @Provides
-    @IntoMap
-    @ClassKey(MapFragment.class)
-    public static BasePresenter provideMapsPresenter(Storage storage) {
-        return new MapsPresenter(storage);
-    }
-
+    @Binds
     @Singleton
-    @Provides
-    public static Storage provideStorage() {
-        return new Storage();
-    }
-
+    abstract Model bindStorage(Storage storage);
 }

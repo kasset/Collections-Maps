@@ -2,37 +2,21 @@ package ua.com.foxminded.collectionsandmapsversion2.presenter;
 
 import android.os.Message;
 
+import ua.com.foxminded.collectionsandmapsversion2.view.BaseFragment;
 
-abstract public class BasePresenter implements BaseContract.BasePresenter {
 
-    BaseContract.Model storage;
+abstract public class BasePresenter {
 
-    public BasePresenter(BaseContract.Model storage) {
-        this.storage = storage;
+    public BasePresenter() {
     }
 
-    @Override
-    public void attachView(BaseContract.BaseView view) {
+    public abstract void attachView(BaseFragment view);
 
-    }
+    public abstract void initiateCalculation(int size);
 
-    @Override
-    public void initiateCalculation(int size) {
+    public abstract void publishResult(Message message);
 
-    }
+    public abstract void restoreResults();
 
-    @Override
-    public void publishResult(Message message) {
-
-    }
-
-    @Override
-    public void restoreResults() {
-
-    }
-
-    @Override
-    public void detachView() {
-
-    }
+    public abstract void detachView();
 }

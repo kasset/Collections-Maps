@@ -13,20 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import javax.inject.Inject;
-
 import ua.com.foxminded.collectionsandmapsversion2.BaseRecyclerViewAdapter;
 import ua.com.foxminded.collectionsandmapsversion2.CalculatedOperation;
 import ua.com.foxminded.collectionsandmapsversion2.ListOfCollectionsOperation;
 import ua.com.foxminded.collectionsandmapsversion2.databinding.FragmentCollectionBinding;
-import ua.com.foxminded.collectionsandmapsversion2.presenter.BaseContract;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.BasePresenter;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.CollectionsPresenter;
 
 
-public class CollectionFragment extends BaseFragment implements BaseContract.BaseView {
+public class CollectionFragment extends BaseFragment {
 
-    private BasePresenter collectionsPresenter;
+
+    CollectionsPresenter collectionsPresenter;
     private FragmentCollectionBinding binding;
     private BaseRecyclerViewAdapter collectionsAdapter;
     private int numberOfColumns = 7;
@@ -53,12 +51,11 @@ public class CollectionFragment extends BaseFragment implements BaseContract.Bas
         recyclerViewCollections.setLayoutManager(layoutManager);
         collectionsAdapter = new BaseRecyclerViewAdapter(listOfResultsOperations);
         recyclerViewCollections.setAdapter(collectionsAdapter);
-        collectionsPresenter = getPresenter(CollectionFragment.class);
         return view;
     }
 
     @Override
-    public void showProgressBar() {
+    public void showInitiateCalculating() {
         for (int i = 0; i < listOfResultsOperations.size(); i++) {
             collectionsAdapter.updateOperationResult(i, 0, true);
         }
@@ -68,6 +65,11 @@ public class CollectionFragment extends BaseFragment implements BaseContract.Bas
     public void publishOperationResult(Message message) {
         collectionsAdapter.updateOperationResult(message.arg1, message.arg2, false);
         collectionsAdapter.notifyItemChanged(message.arg1);
+    }
+
+    @Override
+    protected BasePresenter getPresenter(Class<?> presenterType) {
+        return null;
     }
 
 
@@ -82,8 +84,4 @@ public class CollectionFragment extends BaseFragment implements BaseContract.Bas
         collectionsPresenter.initiateCalculation(size);
     }
 
-    @Override
-    protected BasePresenter getPresenter(Class<?> fragmentType) {
-        return presenterFactory.getPresenter(fragmentType);
-    }
 }
