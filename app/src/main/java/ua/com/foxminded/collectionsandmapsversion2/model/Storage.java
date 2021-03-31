@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import io.reactivex.rxjava3.core.Observable;
 import ua.com.foxminded.collectionsandmapsversion2.strategy.AbstractOperation;
 
 public class Storage implements Model {
@@ -27,4 +28,6 @@ public class Storage implements Model {
     public HashMap restoreResults() {
         return null;
     }
+
+
 }

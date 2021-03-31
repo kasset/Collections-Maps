@@ -20,4 +20,7 @@ public abstract class PresentersModule {
     @IntoMap
     @ClassKey(MapsPresenter.class)
     abstract BasePresenter bindMapsPresenter(MapsPresenter mapsPresenter);
+
+    @Binds
+    abstract BasePresenterFactory bindBasePresenterFactory(BasePresenterFactory basePresenterFactory);
 }
