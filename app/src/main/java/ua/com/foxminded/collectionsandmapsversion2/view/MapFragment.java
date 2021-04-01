@@ -14,14 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import javax.inject.Inject;
-
+import dagger.android.support.AndroidSupportInjection;
 import ua.com.foxminded.collectionsandmapsversion2.BaseRecyclerViewAdapter;
 import ua.com.foxminded.collectionsandmapsversion2.CalculatedOperation;
 import ua.com.foxminded.collectionsandmapsversion2.ListOfMapsOperation;
 import ua.com.foxminded.collectionsandmapsversion2.databinding.FragmentMapBinding;
-import ua.com.foxminded.collectionsandmapsversion2.di.modules.BasePresenterFactory;
-import ua.com.foxminded.collectionsandmapsversion2.presenter.BasePresenter;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.MapsPresenter;
 
 public class MapFragment extends BaseFragment<MapsPresenter> {
@@ -40,6 +37,7 @@ public class MapFragment extends BaseFragment<MapsPresenter> {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+        AndroidSupportInjection.inject(this);
         mapsPresenter = (MapsPresenter) presenterFactory.get(getPresenterClass());
     }
 

@@ -14,8 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import javax.inject.Inject;
-
+import dagger.android.support.AndroidSupportInjection;
 import ua.com.foxminded.collectionsandmapsversion2.BaseRecyclerViewAdapter;
 import ua.com.foxminded.collectionsandmapsversion2.CalculatedOperation;
 import ua.com.foxminded.collectionsandmapsversion2.ListOfCollectionsOperation;
@@ -38,6 +37,7 @@ public class CollectionFragment extends BaseFragment<CollectionsPresenter> {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+        AndroidSupportInjection.inject(this);
         collectionsPresenter = (CollectionsPresenter) presenterFactory.get(getPresenterClass());
     }
 
@@ -46,6 +46,7 @@ public class CollectionFragment extends BaseFragment<CollectionsPresenter> {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         listOfResultsOperations = new ArrayList<>();
         for (int i = 0; i < 21; i++) {
             listOfResultsOperations.add(new CalculatedOperation(0, false));

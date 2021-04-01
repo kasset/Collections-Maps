@@ -13,13 +13,13 @@ import androidx.fragment.app.Fragment;
 import javax.inject.Inject;
 
 import ua.com.foxminded.collectionsandmapsversion2.SizeProvider;
-import ua.com.foxminded.collectionsandmapsversion2.di.modules.BasePresenterFactory;
 import ua.com.foxminded.collectionsandmapsversion2.di.modules.PresenterFactory;
 
 public abstract class BaseFragment<T> extends Fragment implements SizeProvider {
 
     @Inject
     PresenterFactory presenterFactory;
+
 
     public BaseFragment() {
     }

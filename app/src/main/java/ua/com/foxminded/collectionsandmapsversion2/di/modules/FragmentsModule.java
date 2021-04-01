@@ -13,4 +13,5 @@ public interface FragmentsModule {
 
     @ContributesAndroidInjector
     CollectionFragment contributeCollectionFragment();
+
 }
