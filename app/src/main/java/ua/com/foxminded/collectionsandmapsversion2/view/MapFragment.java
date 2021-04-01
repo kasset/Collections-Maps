@@ -1,5 +1,6 @@
 package ua.com.foxminded.collectionsandmapsversion2.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -13,16 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import ua.com.foxminded.collectionsandmapsversion2.BaseRecyclerViewAdapter;
 import ua.com.foxminded.collectionsandmapsversion2.CalculatedOperation;
 import ua.com.foxminded.collectionsandmapsversion2.ListOfMapsOperation;
 import ua.com.foxminded.collectionsandmapsversion2.databinding.FragmentMapBinding;
+import ua.com.foxminded.collectionsandmapsversion2.di.modules.BasePresenterFactory;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.BasePresenter;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.MapsPresenter;
 
-public class MapFragment extends BaseFragment {
+public class MapFragment extends BaseFragment<MapsPresenter> {
 
-    MapsPresenter mapsPresenter;
+    private MapsPresenter mapsPresenter;
     private FragmentMapBinding binding;
     private BaseRecyclerViewAdapter mapAdapter;
     private int numberOfColumns = 3;
@@ -31,6 +35,12 @@ public class MapFragment extends BaseFragment {
 
 
     public MapFragment() {
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mapsPresenter = (MapsPresenter) presenterFactory.get(getPresenterClass());
     }
 
     @Nullable
@@ -67,8 +77,8 @@ public class MapFragment extends BaseFragment {
     }
 
     @Override
-    protected BasePresenter getPresenter(Class<?> presenterType) {
-        return null;
+    public Class<MapsPresenter> getPresenterClass() {
+        return MapsPresenter.class;
     }
 
     @Override

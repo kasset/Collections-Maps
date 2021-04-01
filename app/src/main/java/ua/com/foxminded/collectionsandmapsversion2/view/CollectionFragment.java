@@ -1,5 +1,6 @@
 package ua.com.foxminded.collectionsandmapsversion2.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -13,16 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import ua.com.foxminded.collectionsandmapsversion2.BaseRecyclerViewAdapter;
 import ua.com.foxminded.collectionsandmapsversion2.CalculatedOperation;
 import ua.com.foxminded.collectionsandmapsversion2.ListOfCollectionsOperation;
 import ua.com.foxminded.collectionsandmapsversion2.databinding.FragmentCollectionBinding;
-import ua.com.foxminded.collectionsandmapsversion2.presenter.BasePresenter;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.CollectionsPresenter;
 
 
-public class CollectionFragment extends BaseFragment {
-
+public class CollectionFragment extends BaseFragment<CollectionsPresenter> {
 
     CollectionsPresenter collectionsPresenter;
     private FragmentCollectionBinding binding;
@@ -32,6 +33,12 @@ public class CollectionFragment extends BaseFragment {
     private ListOfCollectionsOperation listOfCollectionsOperation = new ListOfCollectionsOperation();
 
     public CollectionFragment() {
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        collectionsPresenter = (CollectionsPresenter) presenterFactory.get(getPresenterClass());
     }
 
     @Nullable
@@ -68,8 +75,8 @@ public class CollectionFragment extends BaseFragment {
     }
 
     @Override
-    protected BasePresenter getPresenter(Class<?> presenterType) {
-        return null;
+    public Class<CollectionsPresenter> getPresenterClass() {
+        return CollectionsPresenter.class;
     }
 
 

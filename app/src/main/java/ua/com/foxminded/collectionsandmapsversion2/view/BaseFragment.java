@@ -1,6 +1,5 @@
 package ua.com.foxminded.collectionsandmapsversion2.view;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -15,20 +14,13 @@ import javax.inject.Inject;
 
 import ua.com.foxminded.collectionsandmapsversion2.SizeProvider;
 import ua.com.foxminded.collectionsandmapsversion2.di.modules.BasePresenterFactory;
-import ua.com.foxminded.collectionsandmapsversion2.presenter.BasePresenter;
 
-public abstract class BaseFragment extends Fragment implements SizeProvider {
+public abstract class BaseFragment<T> extends Fragment implements SizeProvider {
 
     @Inject
     BasePresenterFactory presenterFactory;
 
     public BaseFragment() {
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-
     }
 
     @Nullable
@@ -45,5 +37,5 @@ public abstract class BaseFragment extends Fragment implements SizeProvider {
 
     public abstract void publishOperationResult(Message message);
 
-    protected abstract BasePresenter getPresenter(Class<?> presenterType);
+    public abstract Class<T> getPresenterClass();
 }

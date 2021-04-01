@@ -2,6 +2,8 @@ package ua.com.foxminded.collectionsandmapsversion2.presenter;
 
 import android.os.Message;
 
+import javax.inject.Inject;
+
 import ua.com.foxminded.collectionsandmapsversion2.view.BaseFragment;
 
 

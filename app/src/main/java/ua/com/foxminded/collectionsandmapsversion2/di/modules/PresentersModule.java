@@ -2,6 +2,7 @@ package ua.com.foxminded.collectionsandmapsversion2.di.modules;
 
 import dagger.Binds;
 import dagger.Module;
+import dagger.Provides;
 import dagger.multibindings.ClassKey;
 import dagger.multibindings.IntoMap;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.BasePresenter;
@@ -22,5 +23,5 @@ public abstract class PresentersModule {
     abstract BasePresenter bindMapsPresenter(MapsPresenter mapsPresenter);
 
     @Binds
-    abstract BasePresenterFactory bindBasePresenterFactory(BasePresenterFactory basePresenterFactory);
+    abstract PresenterFactory bindBasePresenterFactory(BasePresenterFactory basePresenterFactory);
 }
