@@ -10,8 +10,7 @@ import ua.com.foxminded.collectionsandmapsversion2.presenter.BasePresenter;
 
 public class BasePresenterFactory implements PresenterFactory {
 
-    @Inject
-    Map<Class<?>, Provider<BasePresenter>> presenterMap;
+    private Map<Class<?>, Provider<BasePresenter>> presenterMap;
 
     @Inject
     public BasePresenterFactory(Map<Class<?>, Provider<BasePresenter>> presenterMap) {

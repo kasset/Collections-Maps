@@ -10,18 +10,19 @@ import ua.com.foxminded.collectionsandmapsversion2.presenter.CollectionsPresente
 import ua.com.foxminded.collectionsandmapsversion2.presenter.MapsPresenter;
 
 @Module
-public abstract class PresentersModule {
+public interface PresentersModule {
 
     @Binds
     @IntoMap
     @ClassKey(CollectionsPresenter.class)
-    abstract BasePresenter bindCollectionsPresenter(CollectionsPresenter collectionsPresenter);
+    BasePresenter bindCollectionsPresenter(CollectionsPresenter collectionsPresenter);
 
     @Binds
     @IntoMap
     @ClassKey(MapsPresenter.class)
-    abstract BasePresenter bindMapsPresenter(MapsPresenter mapsPresenter);
+    BasePresenter bindMapsPresenter(MapsPresenter mapsPresenter);
 
     @Binds
-    abstract PresenterFactory bindBasePresenterFactory(BasePresenterFactory basePresenterFactory);
+    PresenterFactory bindBasePresenterFactory(BasePresenterFactory basePresenterFactory);
+
 }

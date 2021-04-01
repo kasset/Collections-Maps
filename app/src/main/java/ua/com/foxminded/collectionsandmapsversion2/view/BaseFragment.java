@@ -14,11 +14,12 @@ import javax.inject.Inject;
 
 import ua.com.foxminded.collectionsandmapsversion2.SizeProvider;
 import ua.com.foxminded.collectionsandmapsversion2.di.modules.BasePresenterFactory;
+import ua.com.foxminded.collectionsandmapsversion2.di.modules.PresenterFactory;
 
 public abstract class BaseFragment<T> extends Fragment implements SizeProvider {
 
     @Inject
-    BasePresenterFactory presenterFactory;
+    PresenterFactory presenterFactory;
 
     public BaseFragment() {
     }

@@ -25,7 +25,7 @@ import ua.com.foxminded.collectionsandmapsversion2.presenter.CollectionsPresente
 
 public class CollectionFragment extends BaseFragment<CollectionsPresenter> {
 
-    CollectionsPresenter collectionsPresenter;
+    private CollectionsPresenter collectionsPresenter;
     private FragmentCollectionBinding binding;
     private BaseRecyclerViewAdapter collectionsAdapter;
     private int numberOfColumns = 7;
