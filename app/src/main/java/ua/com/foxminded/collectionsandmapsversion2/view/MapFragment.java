@@ -3,6 +3,7 @@ package ua.com.foxminded.collectionsandmapsversion2.view;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +26,8 @@ public class MapFragment extends BaseFragment<MapsPresenter> {
 
     private MapsPresenter mapsPresenter;
     private FragmentMapBinding binding;
-    private BaseRecyclerViewAdapter mapAdapter;
     private int numberOfColumns = 3;
-    private ArrayList<CalculatedOperation> listOfResultsOperations;
     private ListOfMapsOperation listOfMapsOperation = new ListOfMapsOperation();
-
 
     public MapFragment() {
     }
@@ -46,7 +44,6 @@ public class MapFragment extends BaseFragment<MapsPresenter> {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        listOfResultsOperations = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             listOfResultsOperations.add(new CalculatedOperation(0, true));
         }
@@ -56,22 +53,9 @@ public class MapFragment extends BaseFragment<MapsPresenter> {
         recyclerViewMap.setHasFixedSize(true);
         GridLayoutManager layoutManager = new GridLayoutManager(view.getContext(), numberOfColumns);
         recyclerViewMap.setLayoutManager(layoutManager);
-        mapAdapter = new BaseRecyclerViewAdapter(listOfResultsOperations);
-        recyclerViewMap.setAdapter(mapAdapter);
+        recyclerViewMap.setAdapter(recyclerViewAdapter);
+        mapsPresenter.attachView(this);
         return view;
-    }
-
-    @Override
-    public void showInitiateCalculating() {
-        for (int i = 0; i < listOfResultsOperations.size(); i++) {
-            mapAdapter.updateOperationResult(i, 0, true);
-        }
-    }
-
-    @Override
-    public void publishOperationResult(Message message) {
-        mapAdapter.updateOperationResult(message.arg1, message.arg2, false);
-        mapAdapter.notifyItemChanged(message.arg1);
     }
 
     @Override
@@ -84,7 +68,6 @@ public class MapFragment extends BaseFragment<MapsPresenter> {
         super.onDestroyView();
         binding = null;
     }
-
 
     @Override
     public void sendSize(int size) {

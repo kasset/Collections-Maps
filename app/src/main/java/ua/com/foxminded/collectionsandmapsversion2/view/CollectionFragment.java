@@ -26,9 +26,7 @@ public class CollectionFragment extends BaseFragment<CollectionsPresenter> {
 
     private CollectionsPresenter collectionsPresenter;
     private FragmentCollectionBinding binding;
-    private BaseRecyclerViewAdapter collectionsAdapter;
     private int numberOfColumns = 7;
-    private ArrayList<CalculatedOperation> listOfResultsOperations;
     private ListOfCollectionsOperation listOfCollectionsOperation = new ListOfCollectionsOperation();
 
     public CollectionFragment() {
@@ -46,8 +44,6 @@ public class CollectionFragment extends BaseFragment<CollectionsPresenter> {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
-        listOfResultsOperations = new ArrayList<>();
         for (int i = 0; i < 21; i++) {
             listOfResultsOperations.add(new CalculatedOperation(0, false));
         }
@@ -57,22 +53,9 @@ public class CollectionFragment extends BaseFragment<CollectionsPresenter> {
         recyclerViewCollections.setHasFixedSize(true);
         GridLayoutManager layoutManager = new GridLayoutManager(view.getContext(), numberOfColumns);
         recyclerViewCollections.setLayoutManager(layoutManager);
-        collectionsAdapter = new BaseRecyclerViewAdapter(listOfResultsOperations);
-        recyclerViewCollections.setAdapter(collectionsAdapter);
+        recyclerViewCollections.setAdapter(recyclerViewAdapter);
+        collectionsPresenter.attachView(this);
         return view;
-    }
-
-    @Override
-    public void showInitiateCalculating() {
-        for (int i = 0; i < listOfResultsOperations.size(); i++) {
-            collectionsAdapter.updateOperationResult(i, 0, true);
-        }
-    }
-
-    @Override
-    public void publishOperationResult(Message message) {
-        collectionsAdapter.updateOperationResult(message.arg1, message.arg2, false);
-        collectionsAdapter.notifyItemChanged(message.arg1);
     }
 
     @Override

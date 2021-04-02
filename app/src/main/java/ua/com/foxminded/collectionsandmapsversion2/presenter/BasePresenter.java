@@ -4,21 +4,37 @@ import android.os.Message;
 
 import javax.inject.Inject;
 
+import ua.com.foxminded.collectionsandmapsversion2.model.Model;
+import ua.com.foxminded.collectionsandmapsversion2.model.Storage;
 import ua.com.foxminded.collectionsandmapsversion2.view.BaseFragment;
 
 
-abstract public class BasePresenter {
+public abstract class BasePresenter {
 
-    public BasePresenter() {
+    protected BaseFragment view;
+    protected Model storage;
+
+    public BasePresenter(Model storage) {
+        this.storage = storage;
     }
 
-    public abstract void attachView(BaseFragment view);
+    public void attachView(BaseFragment view) {
+        this.view = view;
+    }
 
-    public abstract void initiateCalculation(int size);
+    public void initiateCalculation(int size) {
+        view.showInitiateCalculating();
+    }
 
-    public abstract void publishResult(Message message);
+    public void publishResult(Message message) {
+        view.publishOperationResult(message);
+    }
 
-    public abstract void restoreResults();
+    public void restoreResults() {
+        storage.restoreResults();
+    }
 
-    public abstract void detachView();
+    public void detachView() {
+        view = null;
+    }
 }

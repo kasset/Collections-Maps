@@ -10,16 +10,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
+import ua.com.foxminded.collectionsandmapsversion2.BaseRecyclerViewAdapter;
+import ua.com.foxminded.collectionsandmapsversion2.CalculatedOperation;
 import ua.com.foxminded.collectionsandmapsversion2.SizeProvider;
+import ua.com.foxminded.collectionsandmapsversion2.databinding.FragmentCollectionBinding;
 import ua.com.foxminded.collectionsandmapsversion2.di.modules.PresenterFactory;
+import ua.com.foxminded.collectionsandmapsversion2.presenter.BasePresenter;
 
 public abstract class BaseFragment<T> extends Fragment implements SizeProvider {
 
     @Inject
     PresenterFactory presenterFactory;
 
+    protected ArrayList<CalculatedOperation> listOfResultsOperations = new ArrayList<>();
+    protected BaseRecyclerViewAdapter recyclerViewAdapter = new BaseRecyclerViewAdapter(listOfResultsOperations);
 
     public BaseFragment() {
     }
@@ -34,9 +42,16 @@ public abstract class BaseFragment<T> extends Fragment implements SizeProvider {
     public void sendSize(int size) {
     }
 
-    public abstract void showInitiateCalculating();
+    public void showInitiateCalculating() {
+        for (int i = 0; i < listOfResultsOperations.size(); i++) {
+            recyclerViewAdapter.updateOperationResult(i, 0, true);
+        }
+    }
 
-    public abstract void publishOperationResult(Message message);
+    public void publishOperationResult(Message message) {
+        recyclerViewAdapter.updateOperationResult(message.arg1, message.arg2, false);
+        recyclerViewAdapter.notifyItemChanged(message.arg1);
+    }
 
     public abstract Class<T> getPresenterClass();
 }
