@@ -1,14 +1,13 @@
 package ua.com.foxminded.collectionsandmapsversion2.model;
 
-import android.os.Message;
-
 import java.util.HashMap;
 import java.util.List;
 
+import ua.com.foxminded.collectionsandmapsversion2.CollectionOperationsCreator;
 import ua.com.foxminded.collectionsandmapsversion2.strategy.AbstractOperation;
 
 public interface Model {
-    Message setOperation(List<AbstractOperation> operations);
+    void setOperation(List<AbstractOperation> fillingOperations, HashMap<Integer, List<AbstractOperation>> microOperations);
 
     HashMap restoreResults();
 }

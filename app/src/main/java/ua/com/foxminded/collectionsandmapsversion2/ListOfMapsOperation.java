@@ -1,6 +1,8 @@
 package ua.com.foxminded.collectionsandmapsversion2;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import ua.com.foxminded.collectionsandmapsversion2.strategy.AbstractOperation;
 
@@ -25,16 +27,12 @@ public class ListOfMapsOperation implements MapOperationsCreator {
     }
 
     @Override
-    public ArrayList<AbstractOperation> createMicroOperations(int idOperation) {
-        if (idOperation == Keys.ID_HASH_MAP) {
-            return buildHashMapOperations();
-        } else if(idOperation == Keys.ID_TREE_MAP) {
-            return buildTreeMapOperations();
-        } else {
-            return null;
-        }
+    public HashMap<Integer, List<AbstractOperation>> createMicroOperations() {
+        HashMap<Integer, List<AbstractOperation>> operationMap = new HashMap<>();
+        operationMap.put(Keys.ID_HASH_MAP, buildHashMapOperations());
+        operationMap.put(Keys.ID_TREE_MAP, buildTreeMapOperations());
+        return operationMap;
     }
-
 
     @Override
     public ArrayList<AbstractOperation> buildHashMapOperations() {

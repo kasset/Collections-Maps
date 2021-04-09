@@ -1,6 +1,8 @@
 package ua.com.foxminded.collectionsandmapsversion2;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import ua.com.foxminded.collectionsandmapsversion2.strategy.AbstractOperation;
 
@@ -9,16 +11,6 @@ public class ListOfCollectionsOperation implements CollectionOperationsCreator {
     public ListOfCollectionsOperation() {
     }
 
-    @Override
-    public ArrayList<AbstractOperation> createMicroOperations(int idOperation) {
-        if (idOperation == Keys.ID_ARRAY_LIST) {
-            return buildArrayListOperations();
-        } else if (idOperation == Keys.ID_LINKED_LIST) {
-            return buildLinkedListOperations();
-        } else if (idOperation == Keys.ID_COPY_ON_WRITE_ARRAY_LIST) {
-            return buildCopyOnWriteArrayListOperations();
-        } else return null;
-    }
 
     @Override
     public ArrayList<AbstractOperation> createFillingOperations(int size) {
@@ -36,6 +28,16 @@ public class ListOfCollectionsOperation implements CollectionOperationsCreator {
         listOfCollections.add(preparingCopyOnWriteArrayList);
         return listOfCollections;
     }
+
+    @Override
+    public HashMap<Integer, List<AbstractOperation>> createMicroOperations() {
+        HashMap<Integer, List<AbstractOperation>> operationsMap = new HashMap<>();
+        operationsMap.put(Keys.ID_ARRAY_LIST, buildArrayListOperations());
+        operationsMap.put(Keys.ID_LINKED_LIST, buildLinkedListOperations());
+        operationsMap.put(Keys.ID_COPY_ON_WRITE_ARRAY_LIST, buildCopyOnWriteArrayListOperations());
+                return operationsMap;
+    }
+
 
     @Override
     public ArrayList<AbstractOperation> buildArrayListOperations() {

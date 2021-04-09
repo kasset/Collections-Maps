@@ -63,7 +63,6 @@ public class CollectionFragment extends BaseFragment<CollectionsPresenter> {
         return CollectionsPresenter.class;
     }
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();

@@ -1,15 +1,12 @@
 package ua.com.foxminded.collectionsandmapsversion2.strategy;
 
-import android.os.Handler;
-import android.os.Message;
+import ua.com.foxminded.collectionsandmapsversion2.OperationResult;
 
-import io.reactivex.rxjava3.core.Observable;
-
-abstract public class AbstractOperation<T> implements Runnable {
+abstract public class AbstractOperation<T> {
     protected T t;
     protected int dataStructureType;
     protected int id;
-    protected Handler handler;
+
 
     public AbstractOperation(T t, int dataStructureType, int id) {
         this.t = t;
@@ -17,21 +14,17 @@ abstract public class AbstractOperation<T> implements Runnable {
         this.id = id;
     }
 
-    public void setHandler(Handler handler) {
-        this.handler = handler;
-    }
-
-    @Override
-    public void run() {
+    public OperationResult run() {
         int start = (int) System.currentTimeMillis();
         operation(t);
         int time = (int) System.currentTimeMillis() - start;
-        Message msg = new Message();
-        msg.what = dataStructureType;
-        msg.arg1 = id;
-        msg.arg2 = time;
-        handler.sendMessage(msg);
+        OperationResult result = new OperationResult();
+        result.duration = time;
+        result.fragmentType = dataStructureType;
+        result.idOperation = id;
+        return result;
     }
+
 
     protected abstract void operation(T dataStructure);
 }

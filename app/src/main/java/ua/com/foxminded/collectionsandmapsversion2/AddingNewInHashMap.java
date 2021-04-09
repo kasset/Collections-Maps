@@ -12,7 +12,6 @@ public class AddingNewInHashMap extends AbstractMicroOperation<HashMap<Integer, 
 
     @Override
     protected void operation(HashMap<Integer, String> dataStructure) {
-
         dataStructure.put(200000, "Foxminded");
     }
 }

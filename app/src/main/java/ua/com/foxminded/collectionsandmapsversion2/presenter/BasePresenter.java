@@ -4,6 +4,8 @@ import android.os.Message;
 
 import javax.inject.Inject;
 
+import ua.com.foxminded.collectionsandmapsversion2.ListOfCollectionsOperation;
+import ua.com.foxminded.collectionsandmapsversion2.ListOfMapsOperation;
 import ua.com.foxminded.collectionsandmapsversion2.model.Model;
 import ua.com.foxminded.collectionsandmapsversion2.model.Storage;
 import ua.com.foxminded.collectionsandmapsversion2.view.BaseFragment;
@@ -13,6 +15,7 @@ public abstract class BasePresenter {
 
     protected BaseFragment view;
     protected Model storage;
+
 
     public BasePresenter(Model storage) {
         this.storage = storage;
@@ -37,4 +40,9 @@ public abstract class BasePresenter {
     public void detachView() {
         view = null;
     }
+
+    public void createOperations(int size) {
+
+    }
+
 }
