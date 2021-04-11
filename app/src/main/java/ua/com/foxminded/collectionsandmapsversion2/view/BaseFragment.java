@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -48,9 +49,10 @@ public abstract class BaseFragment<T> extends Fragment implements SizeProvider {
         }
     }
 
-    public void publishOperationResult(Message message) {
-        recyclerViewAdapter.updateOperationResult(message.arg1, message.arg2, false);
-        recyclerViewAdapter.notifyItemChanged(message.arg1);
+    public void publishOperationResult(Map<Integer, Integer> operationResults) {
+        for (int i = 0; i < operationResults.size(); i++) {
+            recyclerViewAdapter.updateOperationResult(i, operationResults.get(i), false);
+        }
     }
 
     public abstract Class<T> getPresenterClass();

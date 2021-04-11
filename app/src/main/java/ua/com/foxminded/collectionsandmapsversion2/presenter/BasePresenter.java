@@ -1,13 +1,8 @@
 package ua.com.foxminded.collectionsandmapsversion2.presenter;
 
-import android.os.Message;
+import java.util.Map;
 
-import javax.inject.Inject;
-
-import ua.com.foxminded.collectionsandmapsversion2.ListOfCollectionsOperation;
-import ua.com.foxminded.collectionsandmapsversion2.ListOfMapsOperation;
 import ua.com.foxminded.collectionsandmapsversion2.model.Model;
-import ua.com.foxminded.collectionsandmapsversion2.model.Storage;
 import ua.com.foxminded.collectionsandmapsversion2.view.BaseFragment;
 
 
@@ -29,8 +24,8 @@ public abstract class BasePresenter {
         view.showInitiateCalculating();
     }
 
-    public void publishResult(Message message) {
-        view.publishOperationResult(message);
+    public void publishResult(Map<Integer, Integer> operationResult) {
+        view.publishOperationResult(operationResult);
     }
 
     public void restoreResults() {

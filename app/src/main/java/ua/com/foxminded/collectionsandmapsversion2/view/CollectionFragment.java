@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import dagger.android.support.AndroidSupportInjection;
 import ua.com.foxminded.collectionsandmapsversion2.BaseRecyclerViewAdapter;
@@ -62,6 +63,7 @@ public class CollectionFragment extends BaseFragment<CollectionsPresenter> {
     public Class<CollectionsPresenter> getPresenterClass() {
         return CollectionsPresenter.class;
     }
+
 
     @Override
     public void onDestroyView() {
