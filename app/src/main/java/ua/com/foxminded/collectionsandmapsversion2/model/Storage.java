@@ -19,7 +19,7 @@ import ua.com.foxminded.collectionsandmapsversion2.strategy.AbstractOperation;
 public class Storage implements Model {
 
     private ReplaySubject<Map<Integer, Map<Integer, Integer>>> subject = ReplaySubject.create();
-
+    private HashMap<Integer, Map<Integer, Integer>> operationResults = new HashMap<>();
 
     @Inject
     public Storage() {
@@ -28,8 +28,7 @@ public class Storage implements Model {
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public Observable<Map<Integer, Map<Integer, Integer>>> setOperation(List<AbstractOperation> fillingOperations,
-                                                          HashMap<Integer, List<AbstractOperation>> microOperations) {
-        HashMap<Integer, Map<Integer, Integer>> operationResults = new HashMap<>();
+                                                                        HashMap<Integer, List<AbstractOperation>> microOperations) {
         Observable.fromIterable(fillingOperations)
                 .subscribeOn(Schedulers.computation())
                 .flatMap(AbstractOperation -> {
@@ -38,12 +37,7 @@ public class Storage implements Model {
                                 int fragmentType = microOperation.run().fragmentType;
                                 int idOperation = microOperation.run().idOperation;
                                 int durationOfOperation = microOperation.run().duration;
-                                if (!operationResults.containsKey(fragmentType)) {
-                                    operationResults.put(fragmentType, new HashMap<>());
-                                }
-                                operationResults.get(fragmentType).put(idOperation, durationOfOperation);
-                                subject.onNext(operationResults);
-
+                                subject.onNext(getResultsMap(fragmentType, idOperation, durationOfOperation));
                             });
                     return Observable.just(AbstractOperation);
                 })
@@ -55,6 +49,14 @@ public class Storage implements Model {
     @Override
     public HashMap restoreResults() {
         return null;
+    }
+
+    private Map<Integer, Map<Integer, Integer>> getResultsMap(int fragmentType, int idOperation, int result) {
+        if (!operationResults.containsKey(fragmentType)) {
+            operationResults.put(fragmentType, new HashMap<>());
+        }
+        operationResults.get(fragmentType).put(idOperation, result);
+        return operationResults;
     }
 
 
