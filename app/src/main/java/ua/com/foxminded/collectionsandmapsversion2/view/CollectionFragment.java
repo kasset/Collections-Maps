@@ -57,6 +57,14 @@ public class CollectionFragment extends BaseFragment<CollectionsPresenter> {
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (collectionsPresenter.restoreResults() != null && !collectionsPresenter.restoreResults().isEmpty()) {
+            publishOperationResult(collectionsPresenter.restoreResults());
+        }
+    }
+
+    @Override
     public Class<CollectionsPresenter> getPresenterClass() {
         return CollectionsPresenter.class;
     }

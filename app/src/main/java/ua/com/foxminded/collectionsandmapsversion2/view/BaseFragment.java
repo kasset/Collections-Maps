@@ -39,6 +39,7 @@ public abstract class BaseFragment<T> extends Fragment implements SizeProvider {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+
     @Override
     public void sendSize(int size) {
     }

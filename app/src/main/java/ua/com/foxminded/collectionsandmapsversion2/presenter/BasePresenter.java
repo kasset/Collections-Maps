@@ -28,9 +28,7 @@ public abstract class BasePresenter {
         view.publishOperationResult(operationResult);
     }
 
-    public void restoreResults() {
-        storage.restoreResults();
-    }
+    public abstract Map<Integer, Integer> restoreResults();
 
     public void detachView() {
         view = null;

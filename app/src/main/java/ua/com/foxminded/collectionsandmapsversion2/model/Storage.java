@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subjects.ReplaySubject;
+import ua.com.foxminded.collectionsandmapsversion2.model.Model;
 import ua.com.foxminded.collectionsandmapsversion2.strategy.AbstractOperation;
 
 public class Storage implements Model {

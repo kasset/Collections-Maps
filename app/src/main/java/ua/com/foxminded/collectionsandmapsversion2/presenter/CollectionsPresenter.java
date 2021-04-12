@@ -4,10 +4,13 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.Disposable;
+import ua.com.foxminded.collectionsandmapsversion2.Keys;
 import ua.com.foxminded.collectionsandmapsversion2.ListOfCollectionsOperation;
 import ua.com.foxminded.collectionsandmapsversion2.model.Model;
 
@@ -39,6 +42,10 @@ public class CollectionsPresenter extends BasePresenter {
                 .subscribe(map -> publishResult(map.get(1000)));
     }
 
+    @Override
+    public Map<Integer, Integer> restoreResults() {
+        return storage.restoreResults().get(1000);
+    }
 
     @Override
     public void detachView() {

@@ -54,6 +54,13 @@ public class MapFragment extends BaseFragment<MapsPresenter> {
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (mapsPresenter.restoreResults() != null && !mapsPresenter.restoreResults().isEmpty()) {
+            publishOperationResult(mapsPresenter.restoreResults());
+        }
+    }
+    @Override
     public Class<MapsPresenter> getPresenterClass() {
         return MapsPresenter.class;
     }

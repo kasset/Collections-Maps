@@ -1,5 +1,7 @@
 package ua.com.foxminded.collectionsandmapsversion2.presenter;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -32,6 +34,11 @@ public class MapsPresenter extends BasePresenter {
                 mapsOperation.createMicroOperations())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(map -> publishResult(map.get(2000)));
+    }
+
+    @Override
+    public Map<Integer, Integer> restoreResults() {
+       return storage.restoreResults().get(2000);
     }
 
     @Override
