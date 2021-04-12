@@ -28,7 +28,7 @@ public class MapsPresenter extends BasePresenter {
         super.createOperations(size);
         disposable = storage.setOperation(mapsOperation.createFillingOperations(size),
                 mapsOperation.createMicroOperations())
-                .subscribe(integerMapHashMap -> integerMapHashMap.get(2000));
+                .subscribe(map -> publishResult(map.get(2000)));
     }
 
     @Override

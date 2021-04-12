@@ -1,6 +1,7 @@
 package ua.com.foxminded.collectionsandmapsversion2.model;
 
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -17,7 +18,8 @@ import ua.com.foxminded.collectionsandmapsversion2.strategy.AbstractOperation;
 
 public class Storage implements Model {
 
-    private HashMap<Integer, Map<Integer, Integer>> operationResults = new HashMap<>();
+    private ReplaySubject<Map<Integer, Map<Integer, Integer>>> subject = ReplaySubject.create();
+
 
     @Inject
     public Storage() {
@@ -25,11 +27,9 @@ public class Storage implements Model {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public Observable<HashMap<Integer, Map<Integer, Integer>>> setOperation(List<AbstractOperation> fillingOperations,
-                                                                            HashMap<Integer, List<AbstractOperation>> microOperations) {
-
-        ReplaySubject<HashMap<Integer, Map<Integer, Integer>>> subject = ReplaySubject.create();
-
+    public Observable<Map<Integer, Map<Integer, Integer>>> setOperation(List<AbstractOperation> fillingOperations,
+                                                          HashMap<Integer, List<AbstractOperation>> microOperations) {
+        HashMap<Integer, Map<Integer, Integer>> operationResults = new HashMap<>();
         Observable.fromIterable(fillingOperations)
                 .subscribeOn(Schedulers.computation())
                 .flatMap(AbstractOperation -> {
@@ -43,6 +43,7 @@ public class Storage implements Model {
                                 }
                                 operationResults.get(fragmentType).put(idOperation, durationOfOperation);
                                 subject.onNext(operationResults);
+
                             });
                     return Observable.just(AbstractOperation);
                 })
@@ -53,7 +54,7 @@ public class Storage implements Model {
 
     @Override
     public HashMap restoreResults() {
-        return operationResults;
+        return null;
     }
 
 
