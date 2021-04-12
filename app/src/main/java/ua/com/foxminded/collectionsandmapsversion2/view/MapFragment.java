@@ -2,8 +2,6 @@ package ua.com.foxminded.collectionsandmapsversion2.view;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-
 import dagger.android.support.AndroidSupportInjection;
-import ua.com.foxminded.collectionsandmapsversion2.BaseRecyclerViewAdapter;
 import ua.com.foxminded.collectionsandmapsversion2.CalculatedOperation;
 import ua.com.foxminded.collectionsandmapsversion2.ListOfMapsOperation;
 import ua.com.foxminded.collectionsandmapsversion2.databinding.FragmentMapBinding;
@@ -45,7 +40,7 @@ public class MapFragment extends BaseFragment<MapsPresenter> {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         for (int i = 0; i < 6; i++) {
-            listOfResultsOperations.add(new CalculatedOperation(0, true));
+            listOfResultsOperations.add(new CalculatedOperation(0, false));
         }
         binding = FragmentMapBinding.inflate(inflater, container, false);
         View view = binding.getRoot();

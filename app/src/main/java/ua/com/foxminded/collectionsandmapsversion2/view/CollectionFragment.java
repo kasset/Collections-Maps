@@ -1,22 +1,19 @@
 package ua.com.foxminded.collectionsandmapsversion2.view;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.Map;
-
 import dagger.android.support.AndroidSupportInjection;
-import ua.com.foxminded.collectionsandmapsversion2.BaseRecyclerViewAdapter;
 import ua.com.foxminded.collectionsandmapsversion2.CalculatedOperation;
 import ua.com.foxminded.collectionsandmapsversion2.ListOfCollectionsOperation;
 import ua.com.foxminded.collectionsandmapsversion2.databinding.FragmentCollectionBinding;
@@ -71,6 +68,7 @@ public class CollectionFragment extends BaseFragment<CollectionsPresenter> {
         binding = null;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void sendSize(int size) {
         collectionsPresenter.initiateCalculation(size);

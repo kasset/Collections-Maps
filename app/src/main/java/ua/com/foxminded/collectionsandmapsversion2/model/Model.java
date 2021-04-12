@@ -13,5 +13,5 @@ public interface Model {
     Observable<Map<Integer, Map<Integer, Integer>>> setOperation(List<AbstractOperation> fillingOperations,
                                                                  HashMap<Integer, List<AbstractOperation>> microOperations);
 
-    HashMap restoreResults();
+    HashMap<Integer, Map<Integer, Integer>> restoreResults();
 }

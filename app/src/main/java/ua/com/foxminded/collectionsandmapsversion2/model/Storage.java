@@ -1,7 +1,6 @@
 package ua.com.foxminded.collectionsandmapsversion2.model;
 
 import android.os.Build;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -47,8 +46,8 @@ public class Storage implements Model {
 
 
     @Override
-    public HashMap restoreResults() {
-        return null;
+    public HashMap<Integer, Map<Integer, Integer>> restoreResults() {
+        return operationResults;
     }
 
     private Map<Integer, Map<Integer, Integer>> getResultsMap(int fragmentType, int idOperation, int result) {
