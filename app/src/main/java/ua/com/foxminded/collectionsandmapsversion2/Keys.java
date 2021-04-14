@@ -2,8 +2,8 @@ package ua.com.foxminded.collectionsandmapsversion2;
 
 public class Keys {
 
-    static int COLLECTION = 1000;
-    static int MAP = 2000;
+    public static int COLLECTION = 1000;
+    public static int MAP = 2000;
 
     static int ID_ARRAY_LIST = 100;
     static int ID_LINKED_LIST = 200;

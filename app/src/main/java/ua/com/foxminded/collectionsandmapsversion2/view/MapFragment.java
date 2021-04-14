@@ -1,6 +1,5 @@
 package ua.com.foxminded.collectionsandmapsversion2.view;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,72 +10,51 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import dagger.android.support.AndroidSupportInjection;
 import ua.com.foxminded.collectionsandmapsversion2.CalculatedOperation;
-import ua.com.foxminded.collectionsandmapsversion2.ListOfMapsOperation;
+import ua.com.foxminded.collectionsandmapsversion2.Keys;
+import ua.com.foxminded.collectionsandmapsversion2.databinding.FragmentCollectionBinding;
 import ua.com.foxminded.collectionsandmapsversion2.databinding.FragmentMapBinding;
+import ua.com.foxminded.collectionsandmapsversion2.presenter.CollectionsPresenter;
 import ua.com.foxminded.collectionsandmapsversion2.presenter.MapsPresenter;
 
-public class MapFragment extends BaseFragment<MapsPresenter> {
+public class MapFragment extends BaseFragment<MapsPresenter, FragmentMapBinding> {
 
-    private MapsPresenter mapsPresenter;
-    private FragmentMapBinding binding;
     private int numberOfColumns = 3;
-    private ListOfMapsOperation listOfMapsOperation = new ListOfMapsOperation();
 
     public MapFragment() {
     }
 
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        AndroidSupportInjection.inject(this);
-        mapsPresenter = (MapsPresenter) presenterFactory.get(getPresenterClass());
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         for (int i = 0; i < 6; i++) {
             listOfResultsOperations.add(new CalculatedOperation(0, false));
         }
-        binding = FragmentMapBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
-        RecyclerView recyclerViewMap = binding.recyclerViewMap;
-        recyclerViewMap.setHasFixedSize(true);
+        RecyclerView recyclerViewCollections = binding.recyclerViewMap;
+        recyclerViewCollections.setHasFixedSize(true);
         GridLayoutManager layoutManager = new GridLayoutManager(view.getContext(), numberOfColumns);
-        recyclerViewMap.setLayoutManager(layoutManager);
-        recyclerViewMap.setAdapter(recyclerViewAdapter);
-        mapsPresenter.attachView(this);
-        return view;
+        recyclerViewCollections.setLayoutManager(layoutManager);
+        recyclerViewCollections.setAdapter(recyclerViewAdapter);
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (mapsPresenter.restoreResults() != null && !mapsPresenter.restoreResults().isEmpty()) {
-            publishOperationResult(mapsPresenter.restoreResults());
-        }
+    public FragmentMapBinding getBinding(LayoutInflater inflater, ViewGroup container) {
+        return FragmentMapBinding.inflate(inflater, container, false);
     }
+
     @Override
-    public Class<MapsPresenter> getPresenterClass() {
+    public int getFragmentKey() {
+        return Keys.MAP;
+    }
+
+    @Override
+    public Class<?> getPresenterClass() {
         return MapsPresenter.class;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
-
-    @Override
-    public void sendSize(int size) {
-        mapsPresenter.initiateCalculation(size);
-    }
 
 }
+
 
 
 

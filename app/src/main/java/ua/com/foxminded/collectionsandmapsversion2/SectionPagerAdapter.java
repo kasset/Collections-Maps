@@ -35,12 +35,12 @@ public class SectionPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         return super.instantiateItem(container, position);
+
     }
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         super.destroyItem(container, position, object);
-
     }
 
     @Nullable

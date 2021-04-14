@@ -13,12 +13,13 @@ import javax.inject.Inject;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subjects.ReplaySubject;
+import ua.com.foxminded.collectionsandmapsversion2.OperationResult;
 import ua.com.foxminded.collectionsandmapsversion2.model.Model;
 import ua.com.foxminded.collectionsandmapsversion2.strategy.AbstractOperation;
 
 public class Storage implements Model {
 
-    private ReplaySubject<Map<Integer, Map<Integer, Integer>>> subject = ReplaySubject.create();
+    private ReplaySubject<OperationResult> subject = ReplaySubject.create();
     private HashMap<Integer, Map<Integer, Integer>> operationResults = new HashMap<>();
 
     @Inject
@@ -27,36 +28,19 @@ public class Storage implements Model {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public Observable<Map<Integer, Map<Integer, Integer>>> setOperation(List<AbstractOperation> fillingOperations,
-                                                                        HashMap<Integer, List<AbstractOperation>> microOperations) {
+    public void setOperation(List<AbstractOperation> fillingOperations,
+                             HashMap<Integer, List<AbstractOperation>> microOperations) {
         Observable.fromIterable(fillingOperations)
                 .subscribeOn(Schedulers.computation())
-                .flatMap(AbstractOperation -> {
-                    microOperations.get(AbstractOperation.run().idOperation)
-                            .forEach(microOperation -> {
-                                int fragmentType = microOperation.run().fragmentType;
-                                int idOperation = microOperation.run().idOperation;
-                                int durationOfOperation = microOperation.run().duration;
-                                subject.onNext(getResultsMap(fragmentType, idOperation, durationOfOperation));
-                            });
-                    return Observable.just(AbstractOperation);
-                })
-                .subscribe(AbstractOperation::run);
-        return subject;
+                .flatMap(abstractOperation -> Observable.just(abstractOperation.run()))
+                .flatMapIterable(operationResult -> microOperations.get(operationResult.idOperation))
+                .doOnNext(microOperation -> subject.onNext(microOperation.run()))
+                .subscribe();
     }
-
 
     @Override
-    public HashMap<Integer, Map<Integer, Integer>> restoreResults() {
-        return operationResults;
-    }
-
-    private Map<Integer, Map<Integer, Integer>> getResultsMap(int fragmentType, int idOperation, int result) {
-        if (!operationResults.containsKey(fragmentType)) {
-            operationResults.put(fragmentType, new HashMap<>());
-        }
-        operationResults.get(fragmentType).put(idOperation, result);
-        return operationResults;
+    public Observable<OperationResult> getOperationResults() {
+        return subject;
     }
 
 
