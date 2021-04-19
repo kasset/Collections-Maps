@@ -6,7 +6,7 @@ import ua.com.foxminded.collectionsandmapsversion2.ListOfMapsOperation;
 import ua.com.foxminded.collectionsandmapsversion2.OperationsCreator;
 import ua.com.foxminded.collectionsandmapsversion2.model.Model;
 
-public class MapsPresenter extends BasePresenter {
+public class MapsPresenter extends BasePresenter<ListOfMapsOperation> {
 
     @Inject
     public MapsPresenter(Model storage) {
@@ -14,7 +14,7 @@ public class MapsPresenter extends BasePresenter {
     }
 
     @Override
-    public OperationsCreator getOperationsCreator() {
+    public ListOfMapsOperation getOperationsCreator() {
         return new ListOfMapsOperation();
     }
 

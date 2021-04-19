@@ -2,6 +2,7 @@ package ua.com.foxminded.collectionsandmapsversion2.view;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,6 @@ public abstract class BaseFragment<T extends BasePresenter, E extends ViewBindin
     @Inject
     PresenterFactory presenterFactory;
 
-
     protected ArrayList<CalculatedOperation> listOfResultsOperations = new ArrayList<>();
     protected BaseRecyclerViewAdapter recyclerViewAdapter = new BaseRecyclerViewAdapter(listOfResultsOperations);
     protected T basePresenter;
@@ -42,7 +42,6 @@ public abstract class BaseFragment<T extends BasePresenter, E extends ViewBindin
         AndroidSupportInjection.inject(this);
         basePresenter = (T) presenterFactory.get(getPresenterClass());
     }
-
 
     @Nullable
     @Override
@@ -79,16 +78,23 @@ public abstract class BaseFragment<T extends BasePresenter, E extends ViewBindin
         recyclerViewAdapter.updateOperationResult(itemId, result, false);
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        basePresenter.detachView();
+        binding = null;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        basePresenter = null;
+    }
+
     public abstract E getBinding(LayoutInflater inflater, ViewGroup container);
 
     public abstract int getFragmentKey();
 
     public abstract Class<?> getPresenterClass();
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-        basePresenter.detachView();
-    }
 }

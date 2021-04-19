@@ -23,7 +23,4 @@ public class FragmentHolder {
         return fragmentLabel;
     }
 
-    public int getFragmentKey() {
-        return fragmentKey;
-    }
 }

@@ -6,7 +6,6 @@ import androidx.annotation.RequiresApi;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -14,13 +13,11 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subjects.ReplaySubject;
 import ua.com.foxminded.collectionsandmapsversion2.OperationResult;
-import ua.com.foxminded.collectionsandmapsversion2.model.Model;
 import ua.com.foxminded.collectionsandmapsversion2.strategy.AbstractOperation;
 
 public class Storage implements Model {
 
     private ReplaySubject<OperationResult> subject = ReplaySubject.create();
-    private HashMap<Integer, Map<Integer, Integer>> operationResults = new HashMap<>();
 
     @Inject
     public Storage() {
