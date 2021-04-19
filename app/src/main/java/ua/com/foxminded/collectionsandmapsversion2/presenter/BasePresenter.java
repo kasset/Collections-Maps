@@ -39,7 +39,7 @@ public abstract class BasePresenter<T extends OperationsCreator> {
     }
 
     public void detachView() {
-        disposable = null;
+        disposable.dispose();
         view = null;
     }
 
