@@ -32,6 +32,10 @@ public class MainActivity extends DaggerAppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+        pager = binding.pager;
         if (savedInstanceState == null) {
             CollectionFragment collectionFragment = new CollectionFragment();
             MapFragment mapFragment = new MapFragment();
@@ -42,16 +46,14 @@ public class MainActivity extends DaggerAppCompatActivity {
         } else {
             FragmentManager fm = getSupportFragmentManager();
             fragmentsList = new ArrayList<FragmentHolder>() {{
-                add(new FragmentHolder((BaseFragment) fm.getFragments().get(0), Keys.COLLECTION, "Collections"));
-                add(new FragmentHolder((BaseFragment) fm.getFragments().get(1), Keys.MAP, "Maps"));
+                add(new FragmentHolder((BaseFragment) fm.findFragmentByTag("android:switcher:" + pager.getId() + ":" + pager.getCurrentItem()),
+                        Keys.COLLECTION, "Collections"));
+                add(new FragmentHolder((BaseFragment) fm.findFragmentByTag("android:switcher:" + pager.getId() + ":" + pager.getCurrentItem()),
+                        Keys.MAP, "Maps"));
             }};
         }
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
         adapter = new SectionPagerAdapter(getSupportFragmentManager(),
                 BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, fragmentsList);
-        pager = binding.pager;
         binding.pager.setAdapter(adapter);
         binding.tabs.setupWithViewPager(pager);
         binding.calculateButton.setOnClickListener(v -> {
