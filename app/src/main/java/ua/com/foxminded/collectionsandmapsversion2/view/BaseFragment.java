@@ -61,7 +61,7 @@ public abstract class BaseFragment<T extends BasePresenter, E extends ViewBindin
 
     @Override
     public void sendSize(int size) {
-        basePresenter.initiateCalculation(size);
+            basePresenter.initiateCalculation(size);
     }
 
     public void showInitiateCalculating() {
@@ -83,12 +83,6 @@ public abstract class BaseFragment<T extends BasePresenter, E extends ViewBindin
         super.onDestroyView();
         basePresenter.detachView();
         binding = null;
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        basePresenter = null;
     }
 
     public abstract E getBinding(LayoutInflater inflater, ViewGroup container);

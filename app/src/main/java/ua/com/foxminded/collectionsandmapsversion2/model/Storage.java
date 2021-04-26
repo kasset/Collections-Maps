@@ -40,5 +40,4 @@ public class Storage implements Model {
         return subject;
     }
 
-
 }

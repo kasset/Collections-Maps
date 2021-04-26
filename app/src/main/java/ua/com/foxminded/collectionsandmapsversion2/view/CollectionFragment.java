@@ -46,7 +46,6 @@ public class CollectionFragment extends BaseFragment<CollectionsPresenter, Fragm
         return Keys.COLLECTION;
     }
 
-
     @Override
     public Class<?> getPresenterClass() {
         return CollectionsPresenter.class;
