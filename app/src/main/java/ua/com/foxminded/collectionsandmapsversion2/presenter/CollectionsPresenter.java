@@ -7,7 +7,6 @@ import ua.com.foxminded.collectionsandmapsversion2.model.Model;
 
 public class CollectionsPresenter extends BasePresenter<ListOfCollectionsOperation> {
 
-
     @Inject
     public CollectionsPresenter(Model storage) {
         super(storage);
